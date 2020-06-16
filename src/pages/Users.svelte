@@ -18,9 +18,6 @@
     {:then value}
      {#each users as user}
         {user}
-        <!-- <p on:click={chatWithUser(user)}> -->
-          
-        <!-- </p> -->
       {/each}
     {:catch error}
       <p>failed to load users list</p>
