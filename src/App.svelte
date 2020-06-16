@@ -1,38 +1,36 @@
 <script>
-	import {onMount} from 'svelte';
+		import { Router, Link, Route } from "svelte-routing";
 
-	import MsgList from './MsgList.svelte'
-	import MsgForm from './MsgForm.svelte'
+		import Users from './pages/Users.svelte'
+		import Chat from './pages/Chat.svelte'
+		import Login from './pages/Home.svelte'
 
-	import {testWebSocket} from './ws'
-
-	export let name;
-	let websocket;
-
-	const sendMessage = ({detail}) => {
-		// console.log(detail.text)
-		websocket.send(detail.text)
-	}
-
-	let messages = []
-
-	onMount(() => {
-		websocket = testWebSocket()
-		websocket.onmessage = ({data}) => {
-			console.log(data)
-			messages = [...messages, data]
-		}
-	})
-
-	
+		export let url = '/users';
 </script>
 
 <main>
 	<header>
 		Svelte chat
 	</header>
-	<MsgList messages={messages}/>
-	<MsgForm on:send={sendMessage}/>
+
+
+
+<Router url="{url}">
+	<section>
+		<Link to="">Login</Link>
+		<Link to="users">Users</Link>
+		<Link to="chat">Chat</Link>	
+	</section>
+	
+  <div class="main">
+    <Route path="" component="{Login}" />
+    <Route path="chat" component="{Chat}" />
+	<Route path="users" component="{Users}" />
+    <Route path="/">
+		<Login />
+	</Route>
+  </div>
+</Router>
 </main>
 
 <style>

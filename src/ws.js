@@ -20,7 +20,6 @@ var wsUri = "wss://737b8607c714.ngrok.io/api/ws";
   function onOpen(evt)
   {
     writeToScreen("CONNECTED");
-    doSend("WebSocket rocks");
   }
 
   function onClose(evt)
